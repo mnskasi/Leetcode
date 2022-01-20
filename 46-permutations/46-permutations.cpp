@@ -1,41 +1,23 @@
 class Solution {
 public:
-    void solve(vector< vector <int> > &res,vector<int> op,vector<int> nums,int ind,map<int,int> m)
+    void solve(int ind, vector<int> nums, vector< vector<int> > &res)
     {
-        if (ind<nums.size())
+        if (ind==nums.size())
         {
-            ind++;
-            for (auto i : nums)
-            {
-                if (m.find(i)==m.end())
-                {
-                    op.push_back(i);
-                    m[i]=1;
-                    solve(res,op,nums,ind,m);
-                    op.pop_back();
-                    m[i]=0;
-                }
-                else if (m[i]==0)
-                {
-                    op.push_back(i);
-                    m[i]=1;
-                    solve(res,op,nums,ind,m);
-                    op.pop_back();
-                    m[i]=0;
-                }
-            }
+            res.push_back(nums);
+            return;
         }
-        else
+        for (int i=ind;i<nums.size();i++)
         {
-            res.push_back(op);
+            swap(nums[ind],nums[i]);
+            solve(ind+1,nums,res);
+            swap(nums[ind],nums[i]);
         }
     }
     vector<vector<int>> permute(vector<int>& nums) 
     {
-        vector< vector <int> > res;
-        vector<int>op;
-        map<int,int>m;
-        solve(res,op,nums,0,m);
+        vector< vector<int> >res;
+        solve(0,nums,res);
         return res;
     }
 };
