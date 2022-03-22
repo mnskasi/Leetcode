@@ -1,35 +1,28 @@
 class Solution {
 public:
-    string getSmallestString(int n, int k) 
-    {
-        string res="";
-        for (int i=0;i<n;i++)
+    string getSmallestString(int n, int k) {
+        int t=n; 
+        string s="";
+        for(int i=0;i<n;i++)
         {
-            res+='a';
-        }
-        if (n==k)
-        {
-            return res;
-        }
-        else
-        {
-            int temp=k-n;
-            int ind=n-1;
-            while(temp>0)
+            if(t>1)
             {
-                if (temp<=25)
+                if(((t-1)*26)>=k)
                 {
-                    res[ind]+=temp;
-                    temp=0;
+                    s+="a";
+                    t--;
+                    k--;
                 }
                 else
                 {
-                    res[ind]='z';
-                    temp-=25;
+                    s += 'a' + (k-((t-1)*26))-1;
+                    t--;
+                    k=t*26;
                 }
-                ind--;
             }
+            else 
+                s+='a' + k -1;
         }
-        return res;
+    return s;
     }
 };
