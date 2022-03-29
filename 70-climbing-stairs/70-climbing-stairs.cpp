@@ -1,15 +1,26 @@
 class Solution {
 public:
+    int noofways (int n,int arr[])
+    {
+        if (n==1 or n==2)
+        {
+            return n;
+        }
+        if (arr[n]!=-1)
+        {
+            return arr[n];
+        }
+        arr[n]=noofways(n-1,arr)+noofways(n-2,arr);
+        return arr[n];
+        
+    }
     int climbStairs(int n) 
     {
-        if (n==1 or n==2) return n;
         int arr[n+1];
-        arr[1]=1;
-        arr[2]=2;
-        for (int i=3;i<=n;i++)
+        for (int i=0;i<=n;i++)
         {
-            arr[i]=arr[i-1]+arr[i-2];
+            arr[i]=-1;
         }
-        return arr[n];
+        return noofways(n,arr);
     }
 };
