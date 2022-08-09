@@ -1,18 +1,18 @@
 class Solution {
 public:
-    bool isSubsequence(string s, string t) 
-    {
-        if (s.size()==0 && t.size()==0) return true;
-        if (t.size() < s.size()) return false;
-        int t1=0;
-        for (int i=0;i<t.size();i++)
-        {
-            if (t[i]==s[t1])
-            {
-                t1++;
+    bool isSubsequence(string s, string t) {
+        if (s == t) {
+            return true;
+        }
+        if (s.size() > t.size()) {
+            return false;
+        }
+        int sind = 0;
+        for (int i =0;i< t.size();i++) {
+            if (t[i] == s[sind]) {
+                sind++;
             }
-            if (s.size()==t1)
-            {
+            if (sind == s.size()) {
                 return true;
             }
         }
